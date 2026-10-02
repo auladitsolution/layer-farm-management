@@ -10,8 +10,8 @@ const hindSiliguri = Hind_Siliguri({
 });
 
 export const metadata: Metadata = {
-  title: "পোল্ট্রি ফার্ম ম্যানেজার | Poultry Farm Manager",
-  description: "আধুনিক লেয়ার পোল্ট্রি খামার ব্যবস্থাপনা সফটওয়্যার - আওলাদ আইটি সলিউশন",
+  title: "লেয়ার ফার্ম ম্যানেজার | Layer Farm Manager",
+  description: "আধুনিক লেয়ার ফার্ম ব্যবস্থাপনা সফটওয়্যার - আওলাদ আইটি সলিউশন",
 };
 
 export default function RootLayout({
@@ -21,7 +21,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="bn" className={hindSiliguri.variable}>
-      <body className="min-h-screen bg-slate-50 text-slate-900 font-sans antialiased selection:bg-emerald-100 selection:text-emerald-900">
+      <body className={`${hindSiliguri.className} min-h-screen bg-slate-50 text-slate-900 font-sans antialiased selection:bg-emerald-100 selection:text-emerald-900`}>
         {children}
       </body>
     </html>

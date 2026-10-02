@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useId } from 'react';
 import { cn } from '@/lib/utils';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -9,7 +9,8 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ label, error, helperText, className, id, ...props }, ref) => {
-    const inputId = id || props.name || Math.random().toString(36).substring(7);
+    const defaultId = useId();
+    const inputId = id || props.name || defaultId;
 
     return (
       <div className="w-full space-y-1.5">
@@ -48,7 +49,8 @@ interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
 
 export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
   ({ label, error, helperText, className, children, id, ...props }, ref) => {
-    const selectId = id || props.name || Math.random().toString(36).substring(7);
+    const defaultId = useId();
+    const selectId = id || props.name || defaultId;
 
     return (
       <div className="w-full space-y-1.5">

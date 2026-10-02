@@ -39,7 +39,7 @@ function hasRequiredRole(userRole, allowedRoles) {
 
 function runTests() {
   console.log('\n======================================================');
-  console.log(' পোল্ট্রি ফার্ম ম্যানেজার - বিজনেস লজিক ইউনিট টেস্ট');
+  console.log(' লেয়ার ফার্ম ম্যানেজার - বিজনেস লজিক ইউনিট টেস্ট');
   console.log('======================================================');
   let passed = 0;
   let failed = 0;
