@@ -14,10 +14,12 @@ export const metadata: Metadata = {
   description: "বিসমিল্লাহ লেয়ার ফার্ম - বাণিজ্যিক লেয়ার খামার ব্যবস্থাপনা সফটওয়্যার",
   icons: {
     icon: [
-      { url: "/icon.svg", type: "image/svg+xml" },
-      { url: "/favicon.ico" },
+      { url: "/icon.svg?v=2", type: "image/svg+xml" },
+      { url: "/favicon.ico?v=2" },
+      { url: "/icon.png?v=2", type: "image/png" },
     ],
-    apple: "/icon.svg",
+    shortcut: "/favicon.ico?v=2",
+    apple: "/apple-icon.png?v=2",
   },
 };
 
