@@ -101,7 +101,7 @@ export async function GET() {
     // 6. Active Alerts & Settings
     const settingsDoc = await Setting.findOne();
     const settings = settingsDoc || {
-      farmName: 'আওলাদ এগ্রো অ্যান্ড পোল্ট্রি ফার্ম',
+      farmName: 'বিসমিল্লাহ লেয়ার ফার্ম',
       traySize: 30,
       lowFeedThresholdKg: 200,
       highMortalityThresholdPercent: 1.5,
@@ -133,7 +133,7 @@ export async function GET() {
       chartData,
       notifications,
       settings: {
-        farmName: settings.farmName || 'আওলাদ এগ্রো অ্যান্ড পোল্ট্রি ফার্ম',
+        farmName: settings.farmName || 'বিসমিল্লাহ লেয়ার ফার্ম',
         traySize: settings.traySize || 30,
       },
     });

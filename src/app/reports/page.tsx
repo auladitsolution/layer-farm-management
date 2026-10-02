@@ -206,8 +206,8 @@ export default function ReportsPage() {
         <Card className="print:border-none print:shadow-none">
           {/* Print Header */}
           <div className="hidden print:block text-center border-b border-slate-300 pb-4 mb-4">
-            <h1 className="text-xl font-bold text-slate-900">আওলাদ এগ্রো অ্যান্ড পোল্ট্রি ফার্ম</h1>
-            <p className="text-xs text-slate-500">গাজীপুর, ঢাকা • ফোন: +৮৮০ ১৭০০-০০০০০০</p>
+            <h1 className="text-xl font-bold text-slate-900">বিসমিল্লাহ লেয়ার ফার্ম</h1>
+            <p className="text-xs text-slate-500">বাণিজ্যিক লেয়ার খামার</p>
             <h2 className="text-sm font-bold text-emerald-800 mt-2 uppercase tracking-wider">
               {reportType === 'production'
                 ? 'ডিম উৎপাদন ও সংগ্রহ বিবরণী'

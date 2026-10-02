@@ -10,8 +10,15 @@ const hindSiliguri = Hind_Siliguri({
 });
 
 export const metadata: Metadata = {
-  title: "লেয়ার ফার্ম ম্যানেজার | Layer Farm Manager",
-  description: "আধুনিক লেয়ার ফার্ম ব্যবস্থাপনা সফটওয়্যার - আওলাদ আইটি সলিউশন",
+  title: "বিসমিল্লাহ লেয়ার ফার্ম | বাণিজ্যিক লেয়ার খামার",
+  description: "বিসমিল্লাহ লেয়ার ফার্ম - বাণিজ্যিক লেয়ার খামার ব্যবস্থাপনা সফটওয়্যার",
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico" },
+    ],
+    apple: "/icon.svg",
+  },
 };
 
 export default function RootLayout({

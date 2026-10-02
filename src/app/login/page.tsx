@@ -74,11 +74,11 @@ export default function LoginPage() {
         {/* Top Header Banner */}
         <div className="bg-gradient-to-r from-emerald-700 to-green-800 p-6 text-white text-center">
           <div className="w-16 h-16 mx-auto mb-3 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-3xl font-extrabold text-white shadow-inner">
-            প
+            ব
           </div>
-          <h1 className="text-2xl font-bold tracking-tight"> লেয়ার ফার্ম ম্যানেজার</h1>
+          <h1 className="text-2xl font-bold tracking-tight">বিসমিল্লাহ লেয়ার ফার্ম</h1>
           <p className="text-emerald-100 text-xs mt-1">
-            আধুনিক লেয়ার ফার্ম ব্যবস্থাপনা সফটওয়্যার
+            বাণিজ্যিক লেয়ার খামার
           </p>
           <span className="inline-block mt-2 text-[11px] bg-emerald-950/40 text-emerald-200 px-3 py-0.5 rounded-full font-medium">
             আওলাদ আইটি সলিউশন (Aulad IT Solution)

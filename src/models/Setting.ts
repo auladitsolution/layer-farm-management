@@ -18,10 +18,10 @@ export interface ISettingDocument extends Document {
 
 const SettingSchema = new Schema<ISettingDocument>(
   {
-    farmName: { type: String, default: 'আওলাদ এগ্রো অ্যান্ড পোল্ট্রি ফার্ম' },
+    farmName: { type: String, default: 'বিসমিল্লাহ লেয়ার ফার্ম' },
     ownerName: { type: String, default: 'ফার্ম মালিক' },
     phone: { type: String, default: '+880 1700-000000' },
-    email: { type: String, default: 'contact@auladfarm.com' },
+    email: { type: String, default: 'contact@bismillahfarm.com' },
     address: { type: String, default: 'গাজীপুর, ঢাকা, বাংলাদেশ' },
     logoUrl: { type: String, default: '' },
     currency: { type: String, default: '৳ BDT' },

@@ -71,7 +71,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({
         <div className="h-16 flex items-center justify-between px-4 border-b border-slate-800">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-lg bg-emerald-600 flex items-center justify-center font-bold text-white">
-              প
+              ব
             </div>
             <span className="font-bold text-sm truncate">{farmName}</span>
           </div>

@@ -15,7 +15,7 @@ interface DashboardLayoutProps {
 export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
   children,
   user,
-  farmName = 'আওলাদ পোল্ট্রি ফার্ম',
+  farmName = 'বিসমিল্লাহ লেয়ার ফার্ম',
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 

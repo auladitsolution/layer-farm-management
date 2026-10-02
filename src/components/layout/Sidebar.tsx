@@ -76,17 +76,17 @@ export const Sidebar: React.FC<SidebarProps> = ({
         {!collapsed && (
           <div className="flex items-center gap-3 overflow-hidden">
             <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-green-700 flex items-center justify-center text-white font-bold text-lg shadow-sm shrink-0">
-              প
+              ব
             </div>
             <div className="truncate">
               <h1 className="font-bold text-slate-100 text-sm truncate leading-tight">{farmName}</h1>
-              <span className="text-[11px] text-emerald-400 font-medium">লেয়ার পোল্ট্রি ফার্ম</span>
+              <span className="text-[11px] text-emerald-400 font-medium">বাণিজ্যিক লেয়ার খামার</span>
             </div>
           </div>
         )}
         {collapsed && (
           <div className="w-10 h-10 mx-auto rounded-xl bg-gradient-to-br from-emerald-500 to-green-700 flex items-center justify-center text-white font-bold text-lg shadow-sm">
-            প
+            ব
           </div>
         )}
         <button

@@ -791,8 +791,8 @@ export default function SalesPage() {
         >
           <div className="p-4 bg-white border border-slate-200 rounded-xl space-y-4 print:p-0">
             <div className="text-center border-b border-slate-200 pb-3">
-              <h2 className="text-lg font-bold text-slate-800">আওলাদ এগ্রো অ্যান্ড পোল্ট্রি ফার্ম</h2>
-              <p className="text-xs text-slate-500">গাজীপুর, ঢাকা • ফোন: +৮৮০ ১৭০০-০০০০০০</p>
+              <h2 className="text-lg font-bold text-slate-800">বিসমিল্লাহ লেয়ার ফার্ম</h2>
+              <p className="text-xs text-slate-500">বাণিজ্যিক লেয়ার খামার</p>
               <h3 className="text-sm font-semibold text-emerald-800 mt-2">ডিম বিক্রয় মেমো / চালান</h3>
             </div>
 

@@ -61,7 +61,7 @@ export default function DashboardPage() {
   const finance = data?.finance || {};
   const chartData = data?.chartData || [];
   const notifications = data?.notifications || [];
-  const farmName = data?.settings?.farmName || 'আওলাদ এগ্রো অ্যান্ড পোল্ট্রি ফার্ম';
+  const farmName = data?.settings?.farmName || 'বিসমিল্লাহ লেয়ার ফার্ম';
 
   return (
     <DashboardLayout user={user} farmName={farmName}>
@@ -76,7 +76,7 @@ export default function DashboardPage() {
               <Badge variant="emerald">সক্রিয় খামার</Badge>
             </div>
             <p className="text-sm text-slate-500 mt-1">
-              আজ {formatBengaliDate(new Date())} • লেয়ার পোল্ট্রি খামার ওভারভিউ
+              আজ {formatBengaliDate(new Date())} • বাণিজ্যিক লেয়ার খামার ওভারভিউ
             </p>
           </div>
 
