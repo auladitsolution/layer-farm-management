@@ -17,6 +17,7 @@ import {
 import { UserRole, IUser } from '@/types';
 import { ROLE_LABELS_BN } from '@/lib/roles';
 import { Button } from '@/components/ui/Button';
+import { fetchData, isDemoMode } from '@/lib/api-client';
 
 interface HeaderNotification {
   _id?: string;
@@ -43,11 +44,12 @@ export const Header: React.FC<HeaderProps> = ({
   const [notifications, setNotifications] = useState<HeaderNotification[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
 
+  const isDemo = isDemoMode();
+
   useEffect(() => {
-    // Fetch notifications
-    fetch('/api/notifications')
-      .then((res) => (res.ok ? res.json() : []))
-      .then((data: HeaderNotification[]) => {
+    // Fetch notifications using conditional data fetching logic
+    fetchData<HeaderNotification[]>('/api/notifications')
+      .then((data) => {
         if (Array.isArray(data)) setNotifications(data);
       })
       .catch(() => {});
@@ -60,6 +62,10 @@ export const Header: React.FC<HeaderProps> = ({
   };
 
   const switchDemoRole = async (role: UserRole) => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('poultry_demo_role', role);
+      document.cookie = `poultry_demo_role=${role}; path=/; max-age=604800`;
+    }
     const res = await fetch('/api/auth/demo-login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -110,11 +116,18 @@ export const Header: React.FC<HeaderProps> = ({
 
       {/* Right Actions: Live Status, Notifications & Profile */}
       <div className="flex items-center gap-2.5 sm:gap-3">
-        {/* Live system status badge */}
-        <div className="hidden xl:flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-700 text-xs font-semibold">
-          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-          <span>সিস্টেম লাইভ</span>
-        </div>
+        {/* Live / Demo system status badge */}
+        {isDemo ? (
+          <div className="hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-700 text-xs font-semibold shadow-xs">
+            <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+            <span>ডেমো মোড (মক ডেটা)</span>
+          </div>
+        ) : (
+          <div className="hidden xl:flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-700 text-xs font-semibold">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span>সিস্টেম লাইভ</span>
+          </div>
+        )}
 
         {/* Notifications Dropdown */}
         <div className="relative">

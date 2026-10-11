@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "node tests/run-calculations-test.mjs"
+    "test": "node tests/run-calculations-test.mjs && node tests/conditional-fetch.test.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.9.1",

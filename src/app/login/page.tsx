@@ -61,6 +61,10 @@ export default function LoginPage() {
   };
 
   const handleDemoLogin = async (role: UserRole) => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('poultry_demo_role', role);
+      document.cookie = `poultry_demo_role=${role}; path=/; max-age=604800`;
+    }
     setLoading(true);
     setError(null);
     try {

@@ -59,6 +59,14 @@ export async function POST(req: NextRequest) {
       maxAge: 60 * 60 * 24 * 7,
     });
 
+    response.cookies.set('poultry_demo_role', chosenRole, {
+      httpOnly: false,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      path: '/',
+      maxAge: 60 * 60 * 24 * 7,
+    });
+
     return response;
   } catch (error: unknown) {
     console.error('Demo login error:', error);

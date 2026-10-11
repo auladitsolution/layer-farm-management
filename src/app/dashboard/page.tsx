@@ -40,6 +40,7 @@ import {
   Legend,
 } from 'recharts';
 import { IUser } from '@/types';
+import { fetchData } from '@/lib/api-client';
 
 // Custom rich chart tooltip
 const CustomTooltip = ({ active, payload, label }: any) => {
@@ -73,10 +74,10 @@ export default function DashboardPage() {
   const [data, setData] = useState<any>(null);
 
   useEffect(() => {
-    // Fetch current user and dashboard data
+    // Fetch current user and dashboard data with demo mode fallback
     Promise.all([
-      fetch('/api/auth/me').then((res) => (res.ok ? res.json() : null)),
-      fetch('/api/dashboard').then((res) => (res.ok ? res.json() : null)),
+      fetchData<{ user: IUser }>('/api/auth/me').catch(() => null),
+      fetchData<any>('/api/dashboard').catch(() => null),
     ])
       .then(([userData, dashData]) => {
         if (userData?.user) setUser(userData.user);

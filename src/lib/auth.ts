@@ -30,6 +30,16 @@ export async function getCurrentUser(): Promise<IUser | null> {
     const userEmail = (decoded.email || '').toLowerCase();
 
     const isDesignatedOwner = ownerEmails.includes(userEmail) || decoded.uid === 'demo-owner-101';
+    const isDemoUser = decoded.uid.startsWith('demo-');
+
+    const getDemoRoleFromUid = (uid: string): UserRole => {
+      if (uid === 'demo-owner-101') return 'OWNER';
+      if (uid.includes('manager') && !uid.includes('inventory')) return 'MANAGER';
+      if (uid.includes('accountant')) return 'ACCOUNTANT';
+      if (uid.includes('inventory')) return 'INVENTORY_MANAGER';
+      if (uid.includes('staff')) return 'STAFF';
+      return 'STAFF';
+    };
 
     // Handle initial bootstrap if user does not exist
     if (!dbUser) {
@@ -38,16 +48,30 @@ export async function getCurrentUser(): Promise<IUser | null> {
         uid: { $ne: 'demo-owner-101' },
         email: { $nin: ['owner@auladfarm.com', ''] },
       });
-      const shouldBeOwner = isDesignatedOwner || !existingHumanOwner;
+
+      let initialRole: UserRole = 'STAFF';
+      if (isDemoUser) {
+        initialRole = getDemoRoleFromUid(decoded.uid);
+      } else if (isDesignatedOwner || !existingHumanOwner) {
+        initialRole = 'OWNER';
+      }
 
       dbUser = await User.create({
         uid: decoded.uid,
         email: decoded.email || 'user@poultryfarm.com',
         displayName: decoded.name || 'খামার ব্যবহারকারী',
         photoURL: decoded.picture || '',
-        role: shouldBeOwner ? 'OWNER' : 'STAFF',
+        role: initialRole,
         isActive: true,
       });
+    } else if (isDemoUser) {
+      // Ensure demo user role always reflects its designated demo role
+      const expectedDemoRole = getDemoRoleFromUid(decoded.uid);
+      if (dbUser.role !== expectedDemoRole) {
+        dbUser.role = expectedDemoRole;
+        if (decoded.name) dbUser.displayName = decoded.name;
+        await dbUser.save();
+      }
     } else if (isDesignatedOwner && dbUser.role !== 'OWNER') {
       // Auto-upgrade designated owner if previously marked as STAFF
       dbUser.role = 'OWNER';
