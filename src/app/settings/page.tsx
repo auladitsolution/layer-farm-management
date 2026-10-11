@@ -119,15 +119,17 @@ export default function SettingsPage() {
     <DashboardLayout user={user}>
       <div className="space-y-6">
         {/* Banner */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+        <div className="relative overflow-hidden bg-gradient-to-r from-emerald-500/10 via-teal-500/5 to-white/80 p-5 md:p-6 rounded-2xl border border-emerald-500/20 shadow-xs backdrop-blur-xs flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <div className="flex items-center gap-2">
-              <h2 className="text-xl md:text-2xl font-bold text-slate-800 tracking-tight">
+            <div className="flex items-center gap-2.5">
+              <h2 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight">
                 খামার সেটিংস ও অডিট লগ
               </h2>
-              <Badge variant="emerald">সিস্টেম কনফিগারেশন</Badge>
+              <Badge variant="emerald" dot>
+                কনফিগারেশন
+              </Badge>
             </div>
-            <p className="text-sm text-slate-500 mt-1">
+            <p className="text-xs md:text-sm text-slate-600 mt-1 font-medium">
               খামারের তথ্য, ট্রে মাপ, সতর্কবার্তা থ্রেশহোল্ড এবং গুরুত্বপূর্ণ কর্মকাণ্ডের অডিট ট্রেইল
             </p>
           </div>
@@ -136,16 +138,20 @@ export default function SettingsPage() {
         {/* Feedback Alert */}
         {feedback && (
           <div
-            className={`p-4 rounded-xl flex items-center gap-3 text-sm font-medium ${
+            className={`p-4 rounded-2xl flex items-center gap-3 text-sm font-semibold shadow-xs transition-all ${
               feedback.type === 'success'
-                ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
-                : 'bg-rose-50 text-rose-800 border border-rose-200'
+                ? 'bg-emerald-500/10 text-emerald-800 border border-emerald-500/25'
+                : 'bg-rose-500/10 text-rose-800 border border-rose-500/25'
             }`}
           >
             {feedback.type === 'success' ? (
-              <CheckCircle className="w-5 h-5 text-emerald-600 shrink-0" />
+              <div className="w-8 h-8 rounded-xl bg-emerald-500/15 text-emerald-600 flex items-center justify-center shrink-0">
+                <CheckCircle className="w-5 h-5" />
+              </div>
             ) : (
-              <AlertCircle className="w-5 h-5 text-rose-600 shrink-0" />
+              <div className="w-8 h-8 rounded-xl bg-rose-500/15 text-rose-600 flex items-center justify-center shrink-0">
+                <AlertCircle className="w-5 h-5" />
+              </div>
             )}
             <span>{feedback.message}</span>
           </div>

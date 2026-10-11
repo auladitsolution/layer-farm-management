@@ -119,20 +119,22 @@ export default function ReportsPage() {
     <DashboardLayout user={user}>
       <div className="space-y-6">
         {/* Banner */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs print:hidden">
+        <div className="relative overflow-hidden bg-gradient-to-r from-emerald-500/10 via-teal-500/5 to-white/80 p-5 md:p-6 rounded-2xl border border-emerald-500/20 shadow-xs backdrop-blur-xs flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 print:hidden">
           <div>
-            <div className="flex items-center gap-2">
-              <h2 className="text-xl md:text-2xl font-bold text-slate-800 tracking-tight">
+            <div className="flex items-center gap-2.5">
+              <h2 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight">
                 রিপোর্ট ও বিশ্লেষণ কেন্দ্র
               </h2>
-              <Badge variant="emerald">এক্সপোর্ট ও প্রিন্ট</Badge>
+              <Badge variant="emerald" dot>
+                এক্সপোর্ট ও প্রিন্ট
+              </Badge>
             </div>
-            <p className="text-sm text-slate-500 mt-1">
+            <p className="text-xs md:text-sm text-slate-600 mt-1 font-medium">
               ডিম উৎপাদন, বিক্রয় ও আর্থিক লাভ-ক্ষতির সম্পূর্ণ প্রিন্টযোগ্য বিবরণী
             </p>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2.5">
             <Button
               variant="outline"
               size="md"
@@ -153,16 +155,16 @@ export default function ReportsPage() {
         </div>
 
         {/* Filters Bar */}
-        <Card className="p-4 print:hidden">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <Card className="p-4.5 print:hidden">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
             <div>
-              <label className="block text-xs font-semibold text-slate-600 mb-1">
+              <label className="block text-xs font-bold text-slate-700 mb-1.5">
                 রিপোর্টের বিষয় নির্বাচন
               </label>
               <select
                 value={reportType}
                 onChange={(e) => setReportType(e.target.value as any)}
-                className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-3.5 py-2.5 bg-slate-50/70 hover:bg-slate-50 focus:bg-white border border-slate-200/90 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-4 focus:ring-emerald-500/10 focus:border-emerald-600 shadow-2xs transition-all"
               >
                 <option value="production">ডিম উৎপাদন ও সংগ্রহ রিপোর্ট</option>
                 <option value="sales">ডিম বিক্রয় ও আদায় রিপোর্ট</option>

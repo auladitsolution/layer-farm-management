@@ -5,9 +5,26 @@ import { useRouter } from 'next/navigation';
 import { signInWithPopup } from 'firebase/auth';
 import { auth, googleProvider } from '@/lib/firebase';
 import { Button } from '@/components/ui/Button';
-import { ShieldCheck, LogIn, Sparkles, AlertCircle } from 'lucide-react';
+import {
+  ShieldCheck,
+  Sparkles,
+  AlertCircle,
+  Wallet,
+  Wheat,
+  Users,
+  ClipboardList,
+  CheckCircle2,
+} from 'lucide-react';
 import { UserRole } from '@/types';
 import { ROLE_LABELS_BN } from '@/lib/roles';
+
+const roleMeta: Record<UserRole, { icon: React.ElementType; color: string; desc: string }> = {
+  OWNER: { icon: ShieldCheck, color: 'text-emerald-600 bg-emerald-500/10', desc: 'সকল মডিউলে পূর্ণ নিয়ন্ত্রণ' },
+  MANAGER: { icon: ClipboardList, color: 'text-teal-600 bg-teal-500/10', desc: 'দৈনিক তদারকি ও রিপোর্ট' },
+  ACCOUNTANT: { icon: Wallet, color: 'text-sky-600 bg-sky-500/10', desc: 'আয়-ব্যয়, বিক্রয় ও চালান' },
+  INVENTORY_MANAGER: { icon: Wheat, color: 'text-amber-600 bg-amber-500/10', desc: 'খাদ্য ও ওষুধের স্টক' },
+  STAFF: { icon: Users, color: 'text-slate-600 bg-slate-500/10', desc: 'দৈনিক তথ্য এন্ট্রি' },
+};
 
 export default function LoginPage() {
   const router = useRouter();
@@ -69,26 +86,33 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-900 via-slate-900 to-slate-950 flex items-center justify-center p-4">
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-[#071719] to-slate-950 flex items-center justify-center p-4 relative overflow-hidden">
+      {/* Background ambient lighting orbs */}
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-teal-500/10 rounded-full blur-[140px] pointer-events-none" />
+
+      <div className="w-full max-w-md bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/40 overflow-hidden relative z-10 transition-all duration-300">
         {/* Top Header Banner */}
-        <div className="bg-gradient-to-r from-emerald-700 to-green-800 p-6 text-white text-center">
-          <div className="w-16 h-16 mx-auto mb-3 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-3xl font-extrabold text-white shadow-inner">
+        <div className="bg-gradient-to-r from-emerald-700 via-emerald-600 to-teal-700 p-7 text-white text-center relative overflow-hidden">
+          <div className="absolute inset-0 bg-radial-[ellipse_at_top,_var(--tw-gradient-stops)] from-white/10 to-transparent pointer-events-none" />
+
+          <div className="w-16 h-16 mx-auto mb-3.5 rounded-2xl bg-white/15 backdrop-blur-md border border-white/30 flex items-center justify-center text-3xl font-black text-white shadow-lg ring-4 ring-white/10">
             ব
           </div>
-          <h1 className="text-2xl font-bold tracking-tight">বিসমিল্লাহ লেয়ার ফার্ম</h1>
-          <p className="text-emerald-100 text-xs mt-1">
-            বাণিজ্যিক লেয়ার খামার
+          <h1 className="text-2xl font-black tracking-tight drop-shadow-xs">বিসমিল্লাহ লেয়ার ফার্ম</h1>
+          <p className="text-emerald-100 text-xs mt-1 font-medium">
+            বাণিজ্যিক লেয়ার খামার ব্যবস্থাপনা সফটওয়্যার
           </p>
-          <span className="inline-block mt-2 text-[11px] bg-emerald-950/40 text-emerald-200 px-3 py-0.5 rounded-full font-medium">
-            আওলাদ আইটি সলিউশন (Aulad IT Solution)
-          </span>
+          <div className="inline-flex items-center gap-1.5 mt-2.5 text-[11px] bg-slate-950/40 text-emerald-200 px-3 py-1 rounded-full font-medium border border-emerald-400/20">
+            <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+            <span>আওলাদ আইটি সলিউশন (Aulad IT Solution)</span>
+          </div>
         </div>
 
         {/* Content Body */}
-        <div className="p-6 md:p-8 space-y-6">
+        <div className="p-6 md:p-8 space-y-5">
           {error && (
-            <div className="p-3 bg-rose-50 border border-rose-200 rounded-lg flex items-center gap-2 text-rose-700 text-xs font-medium">
+            <div className="p-3.5 bg-rose-50 border border-rose-200 rounded-xl flex items-center gap-2.5 text-rose-700 text-xs font-medium">
               <AlertCircle className="w-4 h-4 shrink-0" />
               <span>{error}</span>
             </div>
@@ -99,7 +123,7 @@ export default function LoginPage() {
             <Button
               onClick={handleGoogleLogin}
               isLoading={loading}
-              className="w-full py-3 bg-white hover:bg-slate-50 text-slate-800 border border-slate-300 shadow-xs flex items-center justify-center gap-3 font-semibold text-sm"
+              className="w-full py-3 bg-white hover:bg-slate-50 text-slate-800 border border-slate-300/90 shadow-xs flex items-center justify-center gap-3 font-bold text-sm rounded-xl active:scale-[0.98] transition-all"
             >
               <svg className="w-4 h-4" viewBox="0 0 24 24">
                 <path
@@ -124,47 +148,63 @@ export default function LoginPage() {
           </div>
 
           <div className="relative flex items-center justify-center">
-            <div className="border-t border-slate-200 w-full" />
-            <span className="bg-white px-3 text-xs text-slate-400 uppercase tracking-wider font-medium">
-              অথবা ডেমো হিসেবে প্রবেশ করুন
+            <div className="border-t border-slate-200/90 w-full" />
+            <span className="bg-white px-3 text-[11px] text-slate-400 uppercase tracking-wider font-bold">
+              অথবা এক ক্লিকে ডেমো প্রবেশ
             </span>
           </div>
 
           {/* Quick Demo Switcher */}
           <div className="space-y-2">
-            <p className="text-xs font-medium text-slate-600 flex items-center gap-1.5">
+            <p className="text-xs font-semibold text-slate-600 flex items-center gap-1.5">
               <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-              টেস্টিং এবং মূল্যায়নের জন্য যেকোনো ভূমিকায় প্রবেশ করুন:
+              টেস্টিং এবং মূল্যায়নের জন্য ভূমিকা নির্বাচন করুন:
             </p>
             <div className="grid grid-cols-1 gap-2">
               {(['OWNER', 'MANAGER', 'ACCOUNTANT', 'INVENTORY_MANAGER', 'STAFF'] as UserRole[]).map(
-                (role) => (
-                  <button
-                    key={role}
-                    type="button"
-                    disabled={loading}
-                    onClick={() => handleDemoLogin(role)}
-                    className="flex items-center justify-between px-3.5 py-2 rounded-lg border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/60 transition-all text-left text-xs group"
-                  >
-                    <div className="flex items-center gap-2">
-                      <ShieldCheck className="w-4 h-4 text-emerald-600 group-hover:scale-110 transition-transform" />
-                      <span className="font-semibold text-slate-800">{ROLE_LABELS_BN[role]}</span>
-                    </div>
-                    <span className="text-[11px] text-slate-400 group-hover:text-emerald-700 font-medium">
-                      প্রবেশ করুন →
-                    </span>
-                  </button>
-                )
+                (role) => {
+                  const meta = roleMeta[role];
+                  const Icon = meta.icon;
+                  return (
+                    <button
+                      key={role}
+                      type="button"
+                      disabled={loading}
+                      onClick={() => handleDemoLogin(role)}
+                      className="flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200/90 hover:border-emerald-500 hover:bg-emerald-50/60 transition-all text-left group cursor-pointer active:scale-[0.99]"
+                    >
+                      <div className="flex items-center gap-2.5">
+                        <div
+                          className={`w-7 h-7 rounded-lg flex items-center justify-center ${meta.color} group-hover:scale-105 transition-transform`}
+                        >
+                          <Icon className="w-4 h-4" />
+                        </div>
+                        <div>
+                          <span className="font-bold text-slate-800 text-xs block leading-tight">
+                            {ROLE_LABELS_BN[role]}
+                          </span>
+                          <span className="text-[10px] text-slate-400 block leading-tight">
+                            {meta.desc}
+                          </span>
+                        </div>
+                      </div>
+                      <span className="text-xs text-slate-400 group-hover:text-emerald-700 font-semibold transition-colors">
+                        প্রবেশ →
+                      </span>
+                    </button>
+                  );
+                }
               )}
             </div>
           </div>
         </div>
 
         {/* Footer */}
-        <div className="p-4 bg-slate-50 border-t border-slate-100 text-center text-xs text-slate-500">
-          সুরক্ষিত ক্লাউড সার্ভার • একক ক্লায়েন্ট ডেডিকেটেড ইনস্ট্যান্স
+        <div className="p-3.5 bg-slate-50 border-t border-slate-100 text-center text-[11px] text-slate-500 font-medium">
+          সুরক্ষিত ক্লাউড সার্ভার • বাণিজ্যিক লেয়ার খামার অটোমেশন
         </div>
       </div>
     </div>
   );
 }
+

@@ -101,15 +101,17 @@ export default function EggProductionPage() {
     <DashboardLayout user={user}>
       <div className="space-y-6">
         {/* Banner */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+        <div className="relative overflow-hidden bg-gradient-to-r from-emerald-500/10 via-teal-500/5 to-white/80 p-5 md:p-6 rounded-2xl border border-emerald-500/20 shadow-xs backdrop-blur-xs flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <div className="flex items-center gap-2">
-              <h2 className="text-xl md:text-2xl font-bold text-slate-800 tracking-tight">
+            <div className="flex items-center gap-2.5">
+              <h2 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight">
                 ডিম উৎপাদন ও স্টক ব্যবস্থাপনা
               </h2>
-              <Badge variant="emerald">মজুদ খতিয়ান</Badge>
+              <Badge variant="emerald" dot>
+                মজুদ খতিয়ান
+              </Badge>
             </div>
-            <p className="text-sm text-slate-500 mt-1">
+            <p className="text-xs md:text-sm text-slate-600 mt-1 font-medium">
               দৈনিক ভালো ও নষ্ট ডিমের মজুদ এবং ট্রে রূপান্তর হিসাব (১ ট্রে = {toBengaliNumber(traySize)}টি ডিম)
             </p>
           </div>
@@ -127,16 +129,20 @@ export default function EggProductionPage() {
         {/* Feedback Alert */}
         {feedback && (
           <div
-            className={`p-4 rounded-xl flex items-center gap-3 text-sm font-medium ${
+            className={`p-4 rounded-2xl flex items-center gap-3 text-sm font-semibold shadow-xs transition-all ${
               feedback.type === 'success'
-                ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
-                : 'bg-rose-50 text-rose-800 border border-rose-200'
+                ? 'bg-emerald-500/10 text-emerald-800 border border-emerald-500/25'
+                : 'bg-rose-500/10 text-rose-800 border border-rose-500/25'
             }`}
           >
             {feedback.type === 'success' ? (
-              <CheckCircle className="w-5 h-5 text-emerald-600 shrink-0" />
+              <div className="w-8 h-8 rounded-xl bg-emerald-500/15 text-emerald-600 flex items-center justify-center shrink-0">
+                <CheckCircle className="w-5 h-5" />
+              </div>
             ) : (
-              <AlertTriangle className="w-5 h-5 text-rose-600 shrink-0" />
+              <div className="w-8 h-8 rounded-xl bg-rose-500/15 text-rose-600 flex items-center justify-center shrink-0">
+                <AlertTriangle className="w-5 h-5" />
+              </div>
             )}
             <span>{feedback.message}</span>
           </div>
@@ -145,17 +151,17 @@ export default function EggProductionPage() {
         {/* Stock Breakdown KPI Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {/* Card 1: Saleable Good Eggs */}
-          <Card className="bg-emerald-50/50 border-emerald-200/80">
-            <span className="text-xs font-semibold text-emerald-800 uppercase tracking-wider block">
+          <Card className="card-hover-effect stat-glow-emerald bg-gradient-to-br from-white via-white to-emerald-50/40 border-emerald-500/20">
+            <span className="text-xs font-bold text-emerald-800 uppercase tracking-wider block">
               বিক্রয়যোগ্য ভালো ডিম
             </span>
             <div className="mt-2 flex items-baseline gap-2">
-              <span className="text-3xl font-black text-emerald-950">
+              <span className="text-3xl font-black text-emerald-950 tracking-tight">
                 {toBengaliNumber(inv.goodPieces || 0)}
               </span>
-              <span className="text-sm text-emerald-700">টি</span>
+              <span className="text-sm font-semibold text-emerald-700">টি</span>
             </div>
-            <div className="mt-2 pt-2 border-t border-emerald-200/60 text-xs text-emerald-800 font-semibold">
+            <div className="mt-2 pt-2 border-t border-emerald-100 text-xs text-emerald-800 font-bold">
               ট্রে হিসেবে: {toBengaliNumber(Math.floor((inv.goodPieces || 0) / traySize))} ট্রে{' '}
               {inv.goodPieces % traySize > 0 &&
                 `(${toBengaliNumber(inv.goodPieces % traySize)}টি অতিরিক্ত)`}
@@ -163,17 +169,17 @@ export default function EggProductionPage() {
           </Card>
 
           {/* Card 2: Total Trays */}
-          <Card className="bg-sky-50/50 border-sky-200/80">
-            <span className="text-xs font-semibold text-sky-800 uppercase tracking-wider block">
+          <Card className="card-hover-effect stat-glow-sky bg-gradient-to-br from-white via-white to-sky-50/40 border-sky-500/20">
+            <span className="text-xs font-bold text-sky-800 uppercase tracking-wider block">
               মোট ট্রে গণনা
             </span>
             <div className="mt-2 flex items-baseline gap-2">
-              <span className="text-3xl font-black text-sky-950">
+              <span className="text-3xl font-black text-sky-950 tracking-tight">
                 {toBengaliNumber(Math.floor((inv.goodPieces || 0) / traySize))}
               </span>
-              <span className="text-sm text-sky-700">ট্রে</span>
+              <span className="text-sm font-semibold text-sky-700">ট্রে</span>
             </div>
-            <div className="mt-2 pt-2 border-t border-sky-200/60 text-xs text-sky-700">
+            <div className="mt-2 pt-2 border-t border-sky-100 text-xs text-sky-700 font-medium">
               ১ ট্রে = {toBengaliNumber(traySize)}টি ডিম নির্ধারিত
             </div>
           </Card>

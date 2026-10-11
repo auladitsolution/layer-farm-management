@@ -20,7 +20,11 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <div className="min-h-screen flex bg-slate-50 text-slate-900">
+    <div className="min-h-screen flex bg-slate-50 text-slate-900 ambient-bg relative overflow-x-hidden">
+      {/* Ambient background light orbs */}
+      <div className="fixed top-0 right-0 w-[500px] h-[350px] bg-emerald-500/5 blur-[120px] rounded-full pointer-events-none -z-10" />
+      <div className="fixed top-1/3 left-1/3 w-[450px] h-[300px] bg-teal-500/4 blur-[130px] rounded-full pointer-events-none -z-10" />
+
       {/* Desktop Sidebar */}
       <Sidebar userRole={user?.role} farmName={farmName} />
 
@@ -46,3 +50,4 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
     </div>
   );
 };
+

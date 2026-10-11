@@ -62,26 +62,28 @@ export default function CostAnalysisPage() {
     <DashboardLayout user={user}>
       <div className="space-y-6">
         {/* Banner */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+        <div className="relative overflow-hidden bg-gradient-to-r from-emerald-500/10 via-teal-500/5 to-white/80 p-5 md:p-6 rounded-2xl border border-emerald-500/20 shadow-xs backdrop-blur-xs flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <div className="flex items-center gap-2">
-              <h2 className="text-xl md:text-2xl font-bold text-slate-800 tracking-tight">
-                ডিম উৎপাদন খরচ ও লাভ বিশ্লেষণ (Cost of Production)
+            <div className="flex items-center gap-2.5">
+              <h2 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight">
+                ডিম উৎপাদন খরচ ও লাভ বিশ্লেষণ
               </h2>
-              <Badge variant="emerald">বৈজ্ঞানিক আর্থিক মডেল</Badge>
+              <Badge variant="emerald" dot>
+                আর্থিক মডেল
+              </Badge>
             </div>
-            <p className="text-sm text-slate-500 mt-1">
+            <p className="text-xs md:text-sm text-slate-600 mt-1 font-medium">
               খাদ্য, ওষুধ, বিদ্যুৎ ও মজুরির ভিত্তিতে প্রতিটি ডিম ও প্রতি ট্রে ডিমের প্রকৃত উৎপাদন খরচ
             </p>
           </div>
 
-          <div className="flex items-center gap-2">
-            <span className="text-xs text-slate-500 font-medium">মাস নির্বাচন:</span>
+          <div className="flex items-center gap-2.5">
+            <span className="text-xs text-slate-600 font-semibold">মাস নির্বাচন:</span>
             <input
               type="month"
               value={month}
               onChange={(e) => setMonth(e.target.value)}
-              className="px-3 py-1.5 bg-white border border-slate-300 rounded-lg text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="px-3 py-2 bg-white/90 border border-slate-200/90 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-4 focus:ring-emerald-500/10 focus:border-emerald-500 shadow-2xs transition-all"
             />
           </div>
         </div>
@@ -89,14 +91,14 @@ export default function CostAnalysisPage() {
         {/* 3 Core Highlight KPI Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Card 1: Cost per Egg */}
-          <Card className="bg-gradient-to-br from-white to-emerald-50/30 border-emerald-200">
-            <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider block">
+          <Card className="card-hover-effect stat-glow-emerald bg-gradient-to-br from-white via-white to-emerald-50/40 border-emerald-500/20">
+            <span className="text-xs font-bold text-emerald-800 uppercase tracking-wider block">
               প্রতিটি ডিমের উৎপাদন খরচ
             </span>
-            <div className="mt-2 text-3xl font-black text-emerald-900">
+            <div className="mt-2 text-3xl font-black text-emerald-950 tracking-tight">
               {formatTaka(analysis.costPerEgg || 0)}
             </div>
-            <div className="mt-2 pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600">
+            <div className="mt-2 pt-2 border-t border-emerald-100 flex items-center justify-between text-xs text-slate-600">
               <span>গড় বিক্রয়মূল্য: {formatTaka(analysis.avgSellingPricePerEgg || 0)}</span>
               <span
                 className={`font-bold ${
@@ -109,14 +111,14 @@ export default function CostAnalysisPage() {
           </Card>
 
           {/* Card 2: Cost per Tray */}
-          <Card className="bg-gradient-to-br from-white to-sky-50/30 border-sky-200">
-            <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider block">
+          <Card className="card-hover-effect stat-glow-sky bg-gradient-to-br from-white via-white to-sky-50/40 border-sky-500/20">
+            <span className="text-xs font-bold text-sky-800 uppercase tracking-wider block">
               প্রতি ট্রে ডিমের উৎপাদন খরচ ({toBengaliNumber(traySize)}টি ডিম)
             </span>
-            <div className="mt-2 text-3xl font-black text-sky-950">
+            <div className="mt-2 text-3xl font-black text-sky-950 tracking-tight">
               {formatTaka(analysis.costPerTray || 0)}
             </div>
-            <div className="mt-2 pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600">
+            <div className="mt-2 pt-2 border-t border-sky-100 flex items-center justify-between text-xs text-slate-600">
               <span>গড় বিক্রয়মূল্য: {formatTaka(analysis.avgSellingPricePerTray || 0)}</span>
               <span
                 className={`font-bold ${

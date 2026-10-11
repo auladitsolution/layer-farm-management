@@ -2,6 +2,17 @@
 
 @theme {
   --font-sans: var(--font-hind-siliguri), 'Hind Siliguri', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --color-brand-50: #ecfdf5;
+  --color-brand-100: #d1fae5;
+  --color-brand-200: #a7f3d0;
+  --color-brand-300: #6ee7b7;
+  --color-brand-400: #34d399;
+  --color-brand-500: #10b981;
+  --color-brand-600: #059669;
+  --color-brand-700: #047857;
+  --color-brand-800: #065f46;
+  --color-brand-900: #064e3b;
+  --color-brand-950: #022c22;
 }
 
 @layer base {
@@ -9,13 +20,17 @@
     --font-bengali: var(--font-hind-siliguri), 'Hind Siliguri', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   }
 
-  html,
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     font-family: var(--font-hind-siliguri), 'Hind Siliguri', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     background-color: #f8fafc;
     color: #0f172a;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 
   button,
@@ -27,13 +42,44 @@
   }
 }
 
+/* Subtle modern background mesh/glow */
+.ambient-bg {
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.04) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(14, 165, 233, 0.03) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.03) 0px, transparent 50%);
+}
+
+/* Glassmorphism helpers */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(226, 232, 240, 0.7);
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.03), 0 2px 6px -1px rgba(15, 23, 42, 0.02);
+}
+
+.glass-dropdown {
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+}
+
 /* Custom scrollbars */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: transparent;
 }
 ::-webkit-scrollbar-thumb {
   background: #cbd5e1;
@@ -43,24 +89,57 @@
   background: #94a3b8;
 }
 
-/* Glassmorphism and badge accents */
+/* Badge accents */
 .badge-emerald {
   background-color: #ecfdf5;
-  color: #065f46;
+  color: #047857;
   border: 1px solid #a7f3d0;
 }
 .badge-amber {
   background-color: #fffbeb;
-  color: #92400e;
+  color: #b45309;
   border: 1px solid #fde68a;
 }
 .badge-rose {
   background-color: #fff1f2;
-  color: #9f1239;
+  color: #be123c;
   border: 1px solid #fecdd3;
 }
 .badge-sky {
   background-color: #f0f9ff;
-  color: #075985;
+  color: #0369a1;
   border: 1px solid #bae6fd;
+}
+.badge-indigo {
+  background-color: #eef2ff;
+  color: #4338ca;
+  border: 1px solid #c7d2fe;
+}
+.badge-purple {
+  background-color: #faf5ff;
+  color: #7e22ce;
+  border: 1px solid #e9d5ff;
+}
+
+/* Smooth active card hover */
+.card-hover-effect {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.card-hover-effect:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px -6px rgba(15, 23, 42, 0.06), 0 4px 8px -2px rgba(15, 23, 42, 0.03);
+}
+
+/* Stat card glow effects */
+.stat-glow-emerald {
+  box-shadow: 0 0 35px -10px rgba(16, 185, 129, 0.15);
+}
+.stat-glow-sky {
+  box-shadow: 0 0 35px -10px rgba(14, 165, 233, 0.15);
+}
+.stat-glow-amber {
+  box-shadow: 0 0 35px -10px rgba(245, 158, 11, 0.15);
+}
+.stat-glow-indigo {
+  box-shadow: 0 0 35px -10px rgba(99, 102, 241, 0.15);
 }

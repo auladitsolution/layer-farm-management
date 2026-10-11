@@ -170,20 +170,22 @@ export default function DailyEntryPage() {
     <DashboardLayout user={user}>
       <div className="space-y-6">
         {/* Banner */}
-        <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div className="relative overflow-hidden bg-gradient-to-r from-emerald-500/10 via-teal-500/5 to-white/80 p-5 md:p-6 rounded-2xl border border-emerald-500/20 shadow-xs backdrop-blur-xs flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <div>
-            <div className="flex items-center gap-2">
-              <h2 className="text-xl md:text-2xl font-bold text-slate-800 tracking-tight">
-                দৈনিক খামার এন্ট্রি (Daily Farm Entry)
+            <div className="flex items-center gap-2.5">
+              <h2 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight">
+                দৈনিক খামার এন্ট্রি
               </h2>
-              <Badge variant="emerald">দ্রুত ইনপুট</Badge>
+              <Badge variant="emerald" dot>
+                দ্রুত ইনপুট
+              </Badge>
             </div>
-            <p className="text-sm text-slate-500 mt-1">
-              ডিম উৎপাদন, খাদ্য ব্যবহার, মৃত্যুসংখ্যা ও বৈজ্ঞানিক কর্মক্ষমতা পরিমাপক
+            <p className="text-xs md:text-sm text-slate-600 mt-1 font-medium">
+              ডিম উৎপাদন, খাদ্য ব্যবহার, মৃত্যুসংখ্যা ও বৈজ্ঞানিক পারফরম্যান্স ট্র্যাকার
             </p>
           </div>
-          <div className="flex items-center gap-2 text-xs font-semibold text-slate-600 bg-slate-100 px-3 py-1.5 rounded-lg">
-            <Calendar className="w-4 h-4 text-emerald-700" />
+          <div className="flex items-center gap-2 text-xs font-semibold text-slate-700 bg-white/90 border border-slate-200/90 px-3.5 py-2 rounded-xl shadow-2xs">
+            <Calendar className="w-4 h-4 text-emerald-600" />
             <span>{formatBengaliDate(date)}</span>
           </div>
         </div>
@@ -191,69 +193,73 @@ export default function DailyEntryPage() {
         {/* Feedback Alert */}
         {feedback && (
           <div
-            className={`p-4 rounded-xl flex items-center gap-3 text-sm font-medium ${
+            className={`p-4 rounded-2xl flex items-center gap-3 text-sm font-semibold shadow-xs transition-all ${
               feedback.type === 'success'
-                ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
-                : 'bg-rose-50 text-rose-800 border border-rose-200'
+                ? 'bg-emerald-500/10 text-emerald-800 border border-emerald-500/25'
+                : 'bg-rose-500/10 text-rose-800 border border-rose-500/25'
             }`}
           >
             {feedback.type === 'success' ? (
-              <CheckCircle className="w-5 h-5 text-emerald-600 shrink-0" />
+              <div className="w-8 h-8 rounded-xl bg-emerald-500/15 text-emerald-600 flex items-center justify-center shrink-0">
+                <CheckCircle className="w-5 h-5" />
+              </div>
             ) : (
-              <AlertCircle className="w-5 h-5 text-rose-600 shrink-0" />
+              <div className="w-8 h-8 rounded-xl bg-rose-500/15 text-rose-600 flex items-center justify-center shrink-0">
+                <AlertCircle className="w-5 h-5" />
+              </div>
             )}
             <span>{feedback.message}</span>
           </div>
         )}
 
         {/* Real-time Indicator Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          <Card className="p-4 bg-emerald-50/40 border-emerald-200/60">
-            <span className="text-[11px] font-semibold text-emerald-800 uppercase tracking-wider block">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5">
+          <Card className="card-hover-effect stat-glow-emerald border-emerald-500/20 bg-gradient-to-br from-white to-emerald-50/30 p-4.5">
+            <span className="text-[11px] font-bold text-emerald-800 uppercase tracking-wider block">
               হেন-ডে উৎপাদন হার
             </span>
-            <div className="text-xl md:text-2xl font-black text-emerald-900 mt-1">
+            <div className="text-2xl md:text-3xl font-black text-emerald-900 mt-1 tracking-tight">
               {toBengaliNumber(henDayPercent)}%
             </div>
-            <span className="text-[10px] text-slate-500 block mt-0.5">
+            <span className="text-[10px] text-slate-500 block mt-1 font-medium">
               (মোট ডিম ÷ বর্তমান মুরগি) × ১০০
             </span>
           </Card>
 
-          <Card className="p-4 bg-amber-50/40 border-amber-200/60">
-            <span className="text-[11px] font-semibold text-amber-800 uppercase tracking-wider block">
+          <Card className="card-hover-effect stat-glow-amber border-amber-500/20 bg-gradient-to-br from-white to-amber-50/30 p-4.5">
+            <span className="text-[11px] font-bold text-amber-800 uppercase tracking-wider block">
               প্রতি মুরগির খাদ্য
             </span>
-            <div className="text-xl md:text-2xl font-black text-amber-900 mt-1">
+            <div className="text-2xl md:text-3xl font-black text-amber-900 mt-1 tracking-tight">
               {toBengaliNumber(feedPerBird)}{' '}
-              <span className="text-xs font-normal text-amber-700">গ্রাম</span>
+              <span className="text-xs font-semibold text-amber-700">গ্রাম</span>
             </div>
-            <span className="text-[10px] text-slate-500 block mt-0.5">
+            <span className="text-[10px] text-slate-500 block mt-1 font-medium">
               আদর্শ মাত্রা: ১১০-১২০ গ্রাম
             </span>
           </Card>
 
-          <Card className="p-4 bg-rose-50/40 border-rose-200/60">
-            <span className="text-[11px] font-semibold text-rose-800 uppercase tracking-wider block">
+          <Card className="card-hover-effect border-rose-500/20 bg-gradient-to-br from-white to-rose-50/30 p-4.5">
+            <span className="text-[11px] font-bold text-rose-800 uppercase tracking-wider block">
               দৈনিক মৃত্যুহার
             </span>
-            <div className="text-xl md:text-2xl font-black text-rose-900 mt-1">
+            <div className="text-2xl md:text-3xl font-black text-rose-900 mt-1 tracking-tight">
               {toBengaliNumber(mortalityPercent)}%
             </div>
-            <span className="text-[10px] text-slate-500 block mt-0.5">
+            <span className="text-[10px] text-slate-500 block mt-1 font-medium">
               সতর্কসীমা: ১.৫% এর নিচে
             </span>
           </Card>
 
-          <Card className="p-4 bg-slate-50 border-slate-200">
-            <span className="text-[11px] font-semibold text-slate-600 uppercase tracking-wider block">
+          <Card className="card-hover-effect border-slate-200 bg-gradient-to-br from-white to-slate-50/60 p-4.5">
+            <span className="text-[11px] font-bold text-slate-600 uppercase tracking-wider block">
               সমাপনী মুরগি সংখ্যা
             </span>
-            <div className="text-xl md:text-2xl font-black text-slate-800 mt-1">
+            <div className="text-2xl md:text-3xl font-black text-slate-900 mt-1 tracking-tight">
               {toBengaliNumber(closingBirds)}{' '}
-              <span className="text-xs font-normal text-slate-500">টি</span>
+              <span className="text-xs font-semibold text-slate-500">টি</span>
             </div>
-            <span className="text-[10px] text-slate-500 block mt-0.5">
+            <span className="text-[10px] text-slate-500 block mt-1 font-medium">
               প্রারম্ভিক: {toBengaliNumber(openingBirds)} টি
             </span>
           </Card>
@@ -261,7 +267,7 @@ export default function DailyEntryPage() {
 
         {/* Main Entry Form */}
         <form onSubmit={handleSubmit}>
-          <Card className="border-emerald-200/70">
+          <Card className="border-emerald-500/20">
             <CardHeader>
               <div>
                 <CardTitle>আজকের তথ্য ইনপুট ফরম</CardTitle>

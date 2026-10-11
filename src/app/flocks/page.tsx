@@ -133,17 +133,22 @@ export default function FlocksPage() {
     <DashboardLayout user={user}>
       <div className="space-y-6">
         {/* Header Banner */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+        <div className="relative overflow-hidden bg-gradient-to-r from-emerald-500/10 via-teal-500/5 to-white/80 p-5 md:p-6 rounded-2xl border border-emerald-500/20 shadow-xs backdrop-blur-xs flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h2 className="text-xl md:text-2xl font-bold text-slate-800 tracking-tight">
-              শেড ও ফ্লক / ব্যাচ ব্যবস্থাপনা
-            </h2>
-            <p className="text-sm text-slate-500 mt-1">
+            <div className="flex items-center gap-2.5">
+              <h2 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight">
+                শেড ও ফ্লক / ব্যাচ ব্যবস্থাপনা
+              </h2>
+              <Badge variant="emerald" dot>
+                সক্রিয় কার্যক্রম
+              </Badge>
+            </div>
+            <p className="text-xs md:text-sm text-slate-600 mt-1 font-medium">
               খামারের শেড ধারণক্ষমতা এবং সক্রিয় ব্যাচসমূহের মুরগির সংখ্যা ও বয়স ট্র্যাকিং
             </p>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2.5">
             <Button
               variant="outline"
               size="md"
